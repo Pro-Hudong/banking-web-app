@@ -4,6 +4,7 @@ import {
   List,
   ListItem,
   ListItemPrefix,
+  Drawer,
 } from "@material-tailwind/react";
 import {
   ShoppingBagIcon,
@@ -12,11 +13,14 @@ import {
   CreditCardIcon,
   QuestionMarkCircleIcon,
 } from "@heroicons/react/24/solid";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
+import { SidebarContext } from "../../contexts/SidebarContext";
 
 import transaction from "../../assets/images/transaction.svg";
 
 export default function Navbar() {
+  const [sidebarToggle, toggleSidebar] = useState(false);
+  const closeSidebar = () => toggleSidebar();
   const [sideList, setSideList] = useState([]);
 
   useEffect(() => {
@@ -81,40 +85,90 @@ export default function Navbar() {
     setSideList([...newLists]);
   };
   return (
-    <Card className="rounded-[20px] bg-[#1C1B20] w-full max-w-[270px] p-[14px]">
-      <div className="mx-2.5 mt-3 mb-11">
-        <span className="text-left text-white font-black text-2xl">
+    <>
+      <Card className="hidden sm:block rounded-[20px] bg-[#1C1B20] w-full max-w-[270px] p-[14px]">
+        <div className="mx-2.5 mt-3 mb-11">
+          <span className="text-left text-white font-black text-2xl">
+            Banking <span className="text-[#B2EDD3]">App</span>
+          </span>
+        </div>
+        <List className="p-0 gap-3.5">
+          {sideList.map((item, index) => {
+            return (
+              <ListItem
+                key={index}
+                className={`group rounded-[10px] p-[12px] align-center hover:opacity-100 ${
+                  item.active ? "active" : "text-white opacity-50"
+                }`}
+                onClick={() => setActive(index)}
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  className={`mr-2 group-hover:fill-[#B2EDD3] ${
+                    item.active ? "fill-[#1C1B20]" : "fill-white"
+                  }`}
+                >
+                  {item.icon}
+                </svg>
+                <span className="font-bold text-[15px] leading-none">
+                  {item.name}
+                </span>
+              </ListItem>
+            );
+          })}
+        </List>
+      </Card>
+      <div className="flex sm:hidden justify-between items-center rounded-[20px] bg-[#1C1B20] p-6">
+        <span className="text-left text-white font-black text-xl sm:text-2xl">
           Banking <span className="text-[#B2EDD3]">App</span>
         </span>
+        <button onClick={toggleSidebar}>
+          <img
+            src="/icons/menu.svg"
+            className="border border-white rounded-[14px] p-[12px]"
+          />
+        </button>
       </div>
-      <List className="p-0 gap-3.5">
-        {sideList.map((item, index) => {
-          return (
-            <ListItem
-              key={index}
-              className={`group rounded-[10px] p-[12px] align-center hover:opacity-100 ${
-                item.active ? "active" : "text-white opacity-50"
-              }`}
-              onClick={() => setActive(index)}
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                className={`mr-2 ${
-                  item.active ? "fill-[#1C1B20]" : "fill-white"
-                } group-hover:fill-[#B2EDD3]`}
-              >
-                {item.icon}
-              </svg>
-              <span className="font-bold text-[15px] leading-none">
-                {item.name}
-              </span>
-            </ListItem>
-          );
-        })}
-      </List>
-    </Card>
+      <Drawer placement="right" open={sidebarToggle} onClose={closeSidebar}>
+        <Card className="bg-[#1C1B20] h-full p-[14px] mt-[10px] rounded-none">
+          <div className="mx-2.5 mt-3 mb-11">
+            <span className="text-left text-white font-black text-2xl">
+              Banking <span className="text-[#B2EDD3]">App</span>
+            </span>
+          </div>
+          <List className="p-0 gap-3.5">
+            {sideList.map((item, index) => {
+              return (
+                <ListItem
+                  key={index}
+                  className={`group rounded-[10px] p-[12px] align-center hover:opacity-100 ${
+                    item.active ? "active" : "text-white opacity-50"
+                  }`}
+                  onClick={() => setActive(index)}
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    className={`mr-2 group-hover:fill-[#B2EDD3] ${
+                      item.active ? "fill-[#1C1B20]" : "fill-white"
+                    }`}
+                  >
+                    {item.icon}
+                  </svg>
+                  <span className="font-bold text-[15px] leading-none">
+                    {item.name}
+                  </span>
+                </ListItem>
+              );
+            })}
+          </List>
+        </Card>
+      </Drawer>
+    </>
   );
 }
