@@ -51,7 +51,7 @@ const SendMoney = (props) => {
       <div className="p-6 ">
         <div className=" text-lg font-bold text-[#1C1B20] flex items-center">
           <a
-            className=" cursor-pointer bg-[#F0EEF5]rounded-xl w-[36px] h-[36px] flex justify-center items-center text-center"
+            className=" cursor-pointer bg-[#F0EEF5] rounded-xl w-[36px] h-[36px] flex justify-center items-center text-center"
             onClick={props.hideSendBar}
           >
             <ChevronLeftIcon className="h-4 w-4" />
