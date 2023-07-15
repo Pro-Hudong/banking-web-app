@@ -13,8 +13,7 @@ import {
   CreditCardIcon,
   QuestionMarkCircleIcon,
 } from "@heroicons/react/24/solid";
-import { useState, useEffect, useContext } from "react";
-import { SidebarContext } from "../../contexts/SidebarContext";
+import { useState, useEffect } from "react";
 
 import transaction from "../../assets/images/transaction.svg";
 

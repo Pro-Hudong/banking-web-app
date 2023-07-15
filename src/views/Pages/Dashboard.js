@@ -1,4 +1,4 @@
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect } from "react";
 import {
   WalletIcon,
   ArchiveBoxIcon,
@@ -23,7 +23,6 @@ import TransactionSide from "../../components/Layout/TransactionSide";
 import SendMoneyRightBar from "../../components/Layout/SendMoneyRightBar";
 import PayRightBar from "../../components/Layout/PayRightBar";
 import CheckoutMessage from "../../components/Layout/CheckoutMessage";
-import { SidebarContext } from "../../contexts/SidebarContext";
 
 const Dashboard = () => {
   const [transactions, setTransaction] = useState([]);
@@ -169,8 +168,6 @@ const Dashboard = () => {
     hidePayPage();
     hideSendBar();
   };
-
-  const { sidebarToggle, toggleSidebar } = useContext(SidebarContext);
 
   return (
     <>
