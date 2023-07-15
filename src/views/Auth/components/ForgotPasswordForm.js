@@ -2,6 +2,7 @@ import { useState } from "react";
 import Input from "../../../components/UI/Input/Input";
 import { Link } from "react-router-dom";
 
+
 const ForgotPasswordForm = () => {
 	const [form, setForm] = useState({});
 
